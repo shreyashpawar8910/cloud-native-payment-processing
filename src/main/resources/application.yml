@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: cloud-native-payment-processing
+
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/payflow}
+    username: ${DB_USERNAME:payflow_user}
+    password: ${DB_PASSWORD:admin123}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show: true
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: health,info
+
+
+server:
+  port: 8080
+

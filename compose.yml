@@ -1,0 +1,24 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: payflow-postgres
+
+    environment:
+      POSTGRES_DB: payflow
+      POSTGRES_USER: payflow_user
+      POSTGRES_PASSWORD: admin123
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - payflow-postgres-data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U payflow_user -d payflow"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  payflow-postgres-data:
